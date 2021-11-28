@@ -81,14 +81,14 @@ class RadioTest {
     }
 
     @Test
-    public void shouldIncreaseVolume10() {
+    public void shouldIncreaseVolume100() {
         Radio radio = new Radio();
-        radio.setCurrentVolume(10);
+        radio.setCurrentVolume(100);
 
         radio.increaseVolume();
 
         int actual = radio.getCurrentVolume();
-        int expected = 10;
+        int expected = 100;
 
         assertEquals(expected, actual);
     }
@@ -169,13 +169,25 @@ class RadioTest {
     }
 
     @Test
-    public void shouldGetAndSetVolume11() {
+    public void shouldGetAndSetVolume110() {
         Radio radio = new Radio();
 
-        radio.setCurrentVolume(11);
+        radio.setCurrentVolume(110);
 
         int actual = radio.getCurrentVolume();
         int expected = 0;
+
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    public void shouldSetAmountStationDefault() {
+        Radio radio = new Radio();
+
+        radio.setCurrentNumberStationDefault();
+
+        int actual = radio.getCurrentNumberStation();
+        int expected = 10;
 
         assertEquals(expected, actual);
     }
