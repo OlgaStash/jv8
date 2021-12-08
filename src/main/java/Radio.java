@@ -9,9 +9,10 @@ import lombok.NoArgsConstructor;
 public class Radio {
 
     private int currentNumberStation;
-    private int maxNumberStation = 9;
-    private int minNumberStation = 0;
     private int amountStation = 10;
+    private int maxNumberStation;
+    private int minNumberStation = 0;
+
 
     private int currentVolume;
     private int maxVolume = 100;
@@ -19,33 +20,44 @@ public class Radio {
 
 //    public Radio() {
 //    }
-//
-//    public Radio(int amountStation) {
-//        this.amountStation = amountStation;
+
+    public Radio(int currentNumberStation, int amountStation) {
+        this.currentNumberStation = currentNumberStation;
+        this.amountStation = amountStation;
+    }
+
+//    public int getAmountStation() {
+//        return amountStation;
+//    }
+
+    public int getMaxNumberStation() {
+        if (amountStation > 0) {
+            return amountStation - 1;
+        }
+        return 0;
+    }
+
+//    public int getMinNumberStation() {
+//        return minNumberStation;
 //    }
 //
 //    public int getCurrentNumberStation() {
-//
 //        return currentNumberStation;
 //    }
 
     public void setCurrentNumberStation(int currentNumberStation) {
-        if (currentNumberStation < minNumberStation) {
+        if (currentNumberStation < getMinNumberStation()) {
             return;
         }
-        if (currentNumberStation > maxNumberStation) {
-            return;
+        if (currentNumberStation > getMaxNumberStation()) {
+            currentNumberStation = getMinNumberStation();
         }
         this.currentNumberStation = currentNumberStation;
     }
 
-    public void setCurrentNumberStationDefault() {
-        this.currentNumberStation = amountStation;
-    }
-
     public void increaseNumberStation() {
         int nextNumberStation = currentNumberStation + 1;
-        if (currentNumberStation < maxNumberStation) {
+        if (currentNumberStation < getMaxNumberStation()) {
             setCurrentNumberStation(nextNumberStation);
         } else {
             setCurrentNumberStation(minNumberStation);
@@ -58,12 +70,11 @@ public class Radio {
         if (currentNumberStation > minNumberStation) {
             setCurrentNumberStation(prevNumberStation);
         } else {
-            setCurrentNumberStation(maxNumberStation);
+            setCurrentNumberStation(getMaxNumberStation());
         }
     }
 
 //    public int getCurrentVolume() {
-//
 //        return currentVolume;
 //    }
 
@@ -97,6 +108,4 @@ public class Radio {
             setCurrentVolume(currentVolume);
         }
     }
-
-
 }
